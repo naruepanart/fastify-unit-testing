@@ -3,3 +3,11 @@
 ### 
 GET http://{{host}}/
 content-type: application/json
+
+### 
+GET http://{{host}}/users
+content-type: application/json
+
+### 
+GET http://{{host}}/login
+content-type: application/json
