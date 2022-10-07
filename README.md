@@ -1,0 +1,2 @@
+# fastify-unit-testing
+ vitest
