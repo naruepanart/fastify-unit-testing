@@ -4,20 +4,15 @@ const { LoginService } = require("./service/login");
 const app = require("fastify")({ logger: false });
 
 const midd1 = async (req, res, next) => {
-  req.user = "abc@gmail.com"
-  next()
+  req.user = "abc1@gmail.com";
+  next();
 };
 
 // Declare a route
 app.get("/", { preHandler: midd1 }, async (req, res) => {
-  const email = req.user
-  try {
-    const response = await LoginService(email);
-    return { response };
-  } catch (error) {
-    res.statusCode = 400;
-    return { error: error.message };
-  }
+  const email = req.user;
+  const response = await LoginService(email);
+  return response;
 });
 
 // Run the server!
