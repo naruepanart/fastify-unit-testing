@@ -1,25 +1,31 @@
 const { LoginService } = require("./service/login");
 
 // Require the framework and instantiate it
-const fastify = require("fastify")({ logger: false });
+const app = require("fastify")({ logger: false });
+
+const midd1 = async (req, res, next) => {
+  req.user = "abc@gmail.com"
+  next()
+};
 
 // Declare a route
-fastify.get("/", async (req, res) => {
+app.get("/", { preHandler: midd1 }, async (req, res) => {
+  const email = req.user
   try {
-    const response = await LoginService("abc1@gmail.com");
+    const response = await LoginService(email);
     return { response };
   } catch (error) {
     res.statusCode = 400;
-    return { error : error.message };
+    return { error: error.message };
   }
 });
 
 // Run the server!
 const start = async () => {
   try {
-    await fastify.listen({ port: 3000 });
+    await app.listen({ port: 3000 });
   } catch (err) {
-    fastify.log.error(err);
+    app.log.error(err);
     process.exit(1);
   }
 };
