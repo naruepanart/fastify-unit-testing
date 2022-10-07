@@ -1,7 +1,7 @@
-const routes = async (app) => {
+const router = async (app) => {
   app.get("/", async function (req, res) {
     return { message: "/users" };
   });
 };
 
-module.exports = routes;
+module.exports = router;
